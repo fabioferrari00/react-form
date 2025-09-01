@@ -1,6 +1,27 @@
 import { useState } from "react";
 
-const initialArticles = ["Pasta", "Uova", "Pane", "Latte", "Merenda"];
+const initialArticles = [
+  {
+    id: 1,
+    title: "Pasta"
+  },
+  {
+    id: 2,
+    title: "Uova"
+  },
+  {
+    id: 3,
+    title: "Pane"
+  },
+  {
+    id: 4,
+    title: "Latte"
+  },
+  {
+    id: 5,
+    title: "Gelati"
+  },
+];
 
 function App() {
   const [newArticle, setNewArticle] = useState("");
@@ -9,7 +30,12 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setArticles([...articles, newArticle]);
+    let obj = {
+      id: articles[articles.length - 1].id + 1,
+      title: newArticle
+    }
+
+    setArticles([...articles, obj]);
     setNewArticle("");
   }
   return (
@@ -21,9 +47,9 @@ function App() {
           </div>
           <div className="col-12">
             <ul className="list-unstayled list-group">
-              {articles.map((article, index) => {
+              {articles.map((article) => {
                 return (
-                  <li className="list-group-item" key={index}>{article}</li>
+                  <li className="list-group-item" key={article.id}>{article.title}</li>
                 )
               })}
             </ul>
